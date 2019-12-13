@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/13 17:14:19 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/13 17:21:46 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = fractol
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =
+SRCS = fractol.c
 
-SRCDIR = src
+SRCDIR = .
 
 SRC = $(addprefix $(SRCDIR)/, $(SRCS))
 
@@ -26,13 +26,13 @@ INCL = include
 
 LIBFT=../libft
 
-FLAGS=-Wall -Wextra -Werror
+FLAGS= #-Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME):
 	make -C $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRC) -L$(LIBFT) -lft -lmlx -framework OpenGL -framework AppKit
+	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRC) -L$(LIBFT) -lft -lmlx -lm -framework OpenGL -framework AppKit
 
 clean:
 	make clean -C $(LIBFT)
