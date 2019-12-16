@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/16 15:56:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/16 13:55:08 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,12 @@
 #include "point.h"
 #include "mlx.h"
 
-int			get_color(int i)
+static int			get_color(int i)
 {
 	return (i << 16 | i << 8 | i);
 }
 
-t_complex	make_complex(double r, double i)
-{
-	t_complex c;
-
-	c.r = r;
-	c.i = i;
-	return (c);
-}
-
-static int calc_mandelbrot(t_complex c)
+static int calc_julia(t_complex c)
 {
 	int i;
 	t_complex z;
@@ -49,27 +40,26 @@ static int calc_mandelbrot(t_complex c)
 	return (i);
 }
 
-void	plot_mandelbrot(t_mlx_data *mlx_data, float width, float height)
+void	plot_julia(t_mlx_data *mlx_data, float width, float height)
 {
 	t_p2i cur;
 	t_complex c;
 	int i;
 
-	clear_frame_buffer(mlx_data->frame_buffer);
 	cur.y = 0;
 	while (cur.y < height)
 	{
 		cur.x = 0;
 		while (cur.x < width)
 		{
-			c.r = (cur.x - mlx_data->mouse_x) * ((4.0*mlx_data->zoom_level) / width);
-			c.i = (cur.y - mlx_data->mouse_y) * ((4.0*mlx_data->zoom_level) / width);
-			i = calc_mandelbrot(c);
-			frame_buffer_set(mlx_data->frame_buffer, cur.x, cur.y, get_color(i));
+			c.r = ((cur.x - width / 2.0) * 4.0 / width);
+			c.i = ((cur.y - height / 2.0) * 4.0 / width);
+			i = calc_julia(c);
+			mlx_pixel_put(mlx_data->mlx_ptr, mlx_data->win_ptr, cur.x, cur.y, get_color(i));
 			cur.x++;
 		}
 		cur.y++;
 	}
-	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
-			mlx_data->frame_buffer->img, 0, 0);
+
+
 }

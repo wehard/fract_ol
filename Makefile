@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/13 17:21:46 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/16 15:25:44 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME = fractol
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = fractol.c
+SRCS = fractol.c\
+		frame_buffer.c\
+		mandelbrot.c\
+		julia.c\
+		point.c
 
 SRCDIR = .
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/13 17:43:46 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/16 15:57:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,68 @@ static t_mlx_data	*ft_init_mlx_data(char *title, int w, int h)
 	mlx_data = (t_mlx_data*)malloc(sizeof(t_mlx_data));
 	mlx_data->mlx_ptr = mlx_init();
 	mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, w, h, title);
+	mlx_data->frame_buffer = create_frame_buffer(mlx_data);
+	mlx_data->zoom_level = 1.0;
+	mlx_data->mouse_x = WIN_W;
+	mlx_data->mouse_y = WIN_H;
 	return (mlx_data);
 }
 
-static int			on_key_press(int key, void *param)
+static int			key_press(int key, void *param)
 {
+	t_mlx_data *mlx_data;
+
+	mlx_data = (t_mlx_data*)param;
 	if (key == ESC)
 		exit(EXIT_SUCCESS);
+	else
+		plot_mandelbrot(mlx_data, WIN_W, WIN_H);
+	return (0);
+}
+
+int mouse_move(int x, int y, void *param)
+{
+	t_mlx_data *mlx_data;
+
+	mlx_data = (t_mlx_data*)param;
+	if (x < 0 || x > WIN_W)
+		x = x < 0 ? 0 : WIN_W;
+	if (y < 0 || y > WIN_H)
+		y = y < 0 ? 0 : WIN_H;
+	mlx_data->mouse_x = x;
+	mlx_data->mouse_y = y;
+	plot_mandelbrot(mlx_data, WIN_W, WIN_H);
+	return (0);
+}
+
+int 	mouse_press(int button, int x, int y, void *param)
+{
+	t_mlx_data *mlx_data;
+
+	mlx_data = (t_mlx_data*)param;
+
+	if (button == 4)
+		mlx_data->zoom_level += 0.01f;
+	if (button == 5)
+		mlx_data->zoom_level -= 0.01f;
+	return (0);
+}
+
+static int	render(void *param)
+{
+	t_mlx_data *mlx_data;
+
+	mlx_data = (t_mlx_data*)param;
+
+	return (0);
+}
+
+int expose(void *param)
+{
+	t_mlx_data *mlx_data;
+
+	mlx_data = (t_mlx_data*)param;
+	ft_putendl("expose");
 	return (0);
 }
 
@@ -46,13 +101,17 @@ int			main(int argc, char const *argv[])
 
 	if (argc == 2)
 	{
-		mlx_data = ft_init_mlx_data("fract_ol", 1280, 720);
+		mlx_data = ft_init_mlx_data("fract_ol", WIN_W, WIN_H);
 	}
 	else
 		return (ft_usage());
 
-	mlx_hook(mlx_data->win_ptr, 2, 0, on_key_press, (void*)mlx_data);
-	//mlx_loop_hook(fdf_data->mlx_ptr, on_render, (void*)fdf_data);
+	mlx_hook(mlx_data->win_ptr, 2, 0, key_press, (void*)mlx_data);
+	mlx_hook(mlx_data->win_ptr, 4, 0, mouse_press, (void*)mlx_data);
+	mlx_hook(mlx_data->win_ptr, 6, 0, mouse_move, (void*)mlx_data);
+	mlx_hook(mlx_data->win_ptr, 12, 0, expose, (void*)mlx_data);
+	//mlx_loop_hook(mlx_data->mlx_ptr, render, (void*)mlx_data);
+	plot_mandelbrot(mlx_data, WIN_W, WIN_H);
 	mlx_loop(mlx_data->mlx_ptr);
 	return (0);
 }
