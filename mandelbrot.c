@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/16 15:56:37 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/16 17:53:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	plot_mandelbrot(t_mlx_data *mlx_data, float width, float height)
 		cur.x = 0;
 		while (cur.x < width)
 		{
-			c.r = (cur.x - mlx_data->mouse_x) * ((4.0*mlx_data->zoom_level) / width);
-			c.i = (cur.y - mlx_data->mouse_y) * ((4.0*mlx_data->zoom_level) / width);
+			c.r = (cur.x - mlx_data->mouse_x) * (4.0 / width);
+			c.i = (cur.y - mlx_data->mouse_y) * (4.0 / width);
 			i = calc_mandelbrot(c);
 			frame_buffer_set(mlx_data->frame_buffer, cur.x, cur.y, get_color(i));
 			cur.x++;

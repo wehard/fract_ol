@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/16 15:57:47 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/16 17:54:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static t_mlx_data	*ft_init_mlx_data(char *title, int w, int h)
 	mlx_data->mouse_x = WIN_W;
 	mlx_data->mouse_y = WIN_H;
 	return (mlx_data);
+}
+
+int close(void *param)
+{
+	(void)param;
+	exit(0);
 }
 
 static int			key_press(int key, void *param)
@@ -110,6 +116,7 @@ int			main(int argc, char const *argv[])
 	mlx_hook(mlx_data->win_ptr, 4, 0, mouse_press, (void*)mlx_data);
 	mlx_hook(mlx_data->win_ptr, 6, 0, mouse_move, (void*)mlx_data);
 	mlx_hook(mlx_data->win_ptr, 12, 0, expose, (void*)mlx_data);
+	mlx_hook(mlx_data->win_ptr, 17, 0, close, (void*)mlx_data);
 	//mlx_loop_hook(mlx_data->mlx_ptr, render, (void*)mlx_data);
 	plot_mandelbrot(mlx_data, WIN_W, WIN_H);
 	mlx_loop(mlx_data->mlx_ptr);
