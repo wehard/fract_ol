@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/16 15:25:44 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/17 12:56:28 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,11 @@ $(NAME):
 	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRC) -L$(LIBFT) -lft -lmlx -lm -framework OpenGL -framework AppKit
 
 clean:
-	make clean -C $(LIBFT)
-	@echo "Removing object files ..."
+	@printf "Removing objects\n"
 	@rm -f $(OBJ)
 
 fclean : clean
-	make fclean -C $(LIBFT)
-	@echo "Removing $(NAME) ..."
+	@printf "Removing $(NAME)\n"
 	@rm -f $(NAME)
 
 re: fclean all
