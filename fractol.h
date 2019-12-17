@@ -6,15 +6,15 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 17:57:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/17 18:14:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_W 800
-# define WIN_H 600
+# define WIN_W 500
+# define WIN_H 500
 # define MAX_ITER 256
 # define ESC 53
 # define FRAC_JULIA 0
