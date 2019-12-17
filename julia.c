@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/16 17:45:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/17 17:57:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,33 @@ static int			get_color(int i)
 	return (i << 16 | i << 8 | i);
 }
 
-static int calc_julia(t_mlx_data *mlx_data, t_complex c)
+static int calc_julia(t_mlx_data *mlx_data, t_complex c, t_p2i cur)
 {
 	int i;
 	t_complex z;
-	double temp;
+	t_complex t;
+	double zoom = 1, moveX = 0, moveY = 0; //you can change these to zoom and change position
 
-
-	// x = ((x / W) * win->size) + win->center_x - (win->size * 0.5);
-	// y = ((y / W) * win->size) + win->center_y - (win->size * 0.5);
-	// re = (((D)win->mous->x - (D)(WINDOW_SIZE / 2)) / (D)W);
-	// im = (((D)win->mous->y - (D)(WINDOW_SIZE / 2)) / (D)W);
-	c.r = (c.r / (float)WIN_W) + 640.0f - ((float)WIN_W * 0.5);
-	c.i = (c.i / (float)WIN_H) + 360.0f - ((float)WIN_H * 0.5);
-	z.r = ((double)mlx_data->mouse_x - (double)(WIN_W / 2)) / (double)WIN_W;
-	z.i = ((double)mlx_data->mouse_y - (double)(WIN_H / 2)) / (double)WIN_H;
+	//calculate the initial real and imaginary part of z, based on the pixel location and zoom and position values
+	z.r = 1.5 * (cur.x - WIN_W / 2) / (0.5 * mlx_data->zoom * WIN_W) + mlx_data->move_x;
+	z.i = (cur.y - WIN_H / 2) / (0.5 * mlx_data->zoom * WIN_H) + mlx_data->move_x;
+	//i will represent the number of iterations
+	//start the iteration process
 	i = 0;
-	while (z.r * z.r + z.i * z.i < 4 && i < MAX_ITER)
+	while(i < MAX_ITER)
 	{
-		temp = z.r * z.r - z.i * z.i + c.r;
-		z.i = 2.0 * z.r * z.i + c.i;
-		z.r = temp;
+		//remember value of previous iteration
+		t.r = z.r;
+		t.i = z.i;
+		//the actual iteration, the real and imaginary part are calculated
+		z.r = t.r * t.r - t.i * t.i + c.r;
+		z.i = 2 * t.r * t.i + c.i;
+		//if the point is outside the circle with radius 2: stop
+		if((z.r * z.r + z.i * z.i) > 4)
+			break ;
 		i++;
 	}
+
 	return (i);
 }
 
@@ -52,20 +56,18 @@ void	plot_julia(t_mlx_data *mlx_data, float width, float height)
 	t_complex c;
 	int i;
 
+	c.r = -0.7;
+	c.i = 0.27015;
 	cur.y = 0;
-	while (cur.y < height)
+	while(cur.y < height)
 	{
 		cur.x = 0;
-		while (cur.x < width)
+		while(cur.x < width)
 		{
-			c.r = ((cur.x - width / 2.0) * 4.0 / width);
-			c.i = ((cur.y - height / 2.0) * 4.0 / width);
-			i = calc_julia(mlx_data, c);
+			i = calc_julia(mlx_data, c, cur);
 			mlx_pixel_put(mlx_data->mlx_ptr, mlx_data->win_ptr, cur.x, cur.y, get_color(i));
 			cur.x++;
-		}
+  		}
 		cur.y++;
 	}
-
-
 }

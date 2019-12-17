@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/16 17:29:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/17 17:57:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define WIN_H 600
 # define MAX_ITER 256
 # define ESC 53
+# define FRAC_JULIA 0
+# define FRAC_MANDELBROT 1
+# define FRAC_POOP 2
 
 typedef struct		s_frame_buffer
 {
@@ -34,9 +37,12 @@ typedef struct		s_mlx_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_frame_buffer	*frame_buffer;
-	float			zoom_level;
 	int				mouse_x;
 	int				mouse_y;
+	int				fractal_type;
+	double			zoom;
+	double			move_x;
+	double			move_y;
 }					t_mlx_data;
 
 typedef struct		s_complex
