@@ -6,11 +6,12 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 20:09:30 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:42:59 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "keys.h"
 #include "libft.h"
 #include "mlx.h"
 #include <stdlib.h>
@@ -20,10 +21,13 @@ int			key_press(int key, void *param)
 	t_mlx_data *mlx_data;
 
 	mlx_data = (t_mlx_data*)param;
-	if (key == ESC)
+	if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	else
-		plot_mandelbrot(mlx_data, WIN_W, WIN_H);
+	if (key == KEY_1)
+		mlx_data->fractal_type = FRAC_JULIA;
+	if (key == KEY_2)
+		mlx_data->fractal_type = FRAC_MANDELBROT;
+	plot_fractal(mlx_data, WIN_W, WIN_H);
 	return (0);
 }
 
