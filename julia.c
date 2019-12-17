@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 20:32:45 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/18 00:09:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	plot_julia(t_mlx_data *mlx_data, float width, float height)
 	t_complex c;
 	int i;
 
-	c.r = -0.7;
-	c.i = 0.27015;
+	c.r = ft_map_range(mlx_data->mouse_x, ft_make_pair_d(0.0, width), ft_make_pair_d(-1.0, 1.0)); //-0.7;
+	c.i = ft_map_range(mlx_data->mouse_y, ft_make_pair_d(0.0, height), ft_make_pair_d(-1.0, 1.0)); //0.27015;
 	cur.y = 0;
 	while(cur.y < height)
 	{
