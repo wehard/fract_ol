@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 18:14:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:14:06 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_complex
 	double			i;
 }					t_complex;
 
+void 				plot_fractal(t_mlx_data *mlx_data, int width, int height);
 void				plot_mandelbrot(t_mlx_data *mlx_data, float width, float height);
 void				plot_julia(t_mlx_data *mlx_data, float width, float height);
 t_complex			make_complex(double r, double i);
@@ -58,5 +59,12 @@ t_complex			make_complex(double r, double i);
 t_frame_buffer		*create_frame_buffer(t_mlx_data *mlx_data);
 void				frame_buffer_set(t_frame_buffer *fb, int x, int y, int c);
 void				clear_frame_buffer(t_frame_buffer *fb);
+
+void				setup_controls(t_mlx_data *mlx_data);
+int 				close(void *param);
+int 				expose(void *param);
+int 				mouse_press(int button, int x, int y, void *param);
+int 				mouse_move(int x, int y, void *param);
+int					key_press(int key, void *param);
 
 #endif

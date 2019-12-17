@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/17 12:56:28 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/17 20:08:13 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = fractol.c\
+		controls.c\
 		frame_buffer.c\
 		mandelbrot.c\
 		julia.c\
@@ -38,6 +39,12 @@ $(NAME):
 	make -C $(LIBFT)
 	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRC) -L$(LIBFT) -lft -lmlx -lm -framework OpenGL -framework AppKit
 
+libft:
+	make re -C $(LIBFT)
+
+linux:
+	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRC) -L$(LIBFT) -lft -lmlx -lXext -lX11 -lm
+
 clean:
 	@printf "Removing objects\n"
 	@rm -f $(OBJ)
@@ -48,4 +55,4 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all libft clean fclean re
