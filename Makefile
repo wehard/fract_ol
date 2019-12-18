@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/17 20:08:13 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/18 22:13:50 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS = fractol.c\
 		frame_buffer.c\
 		mandelbrot.c\
 		julia.c\
-		point.c
+		point.c\
+		color.c
 
 SRCDIR = .
 

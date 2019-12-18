@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 18:11:42 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:13:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #include "libft.h"
 #include "point.h"
 #include "mlx.h"
-
-int			get_color(int i)
-{
-	return (i << 16 | i << 8 | i);
-}
 
 t_complex	make_complex(double r, double i)
 {

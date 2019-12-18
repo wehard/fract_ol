@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/18 00:09:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:31:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #include "libft.h"
 #include "point.h"
 #include "mlx.h"
-
-static int			get_color(int i)
-{
-	return (i << 16 | i << 8 | i);
-}
 
 static int calc_julia(t_mlx_data *mlx_data, t_complex c, t_p2i cur)
 {

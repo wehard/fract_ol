@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 20:38:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:13:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int 				expose(void *param);
 int 				mouse_press(int button, int x, int y, void *param);
 int 				mouse_move(int x, int y, void *param);
 int					key_press(int key, void *param);
+
+int					get_color(int i);
 
 #endif
