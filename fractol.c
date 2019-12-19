@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 20:46:31 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/19 11:51:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ static t_mlx_data	*ft_init_mlx_data(char *title, int w, int h)
 	return (mlx_data);
 }
 
+static void			delete_mlx(t_mlx_data *mlx_data)
+{
+	mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
+	mlx_destroy_image(mlx_data->mlx_ptr, mlx_data->frame_buffer->img);
+	free(mlx_data->frame_buffer);
+	free(mlx_data);
+	exit(EXIT_SUCCESS);
+}
+
 void plot_fractal(t_mlx_data *mlx_data, int width, int height)
 {
 	if (mlx_data->fractal_type == FRAC_JULIA)
@@ -47,6 +56,7 @@ void plot_fractal(t_mlx_data *mlx_data, int width, int height)
 		plot_mandelbrot(mlx_data, WIN_W, WIN_H);
 	else
 		plot_julia(mlx_data, WIN_W, WIN_H);
+
 }
 
 static int	render(void *param)
@@ -73,5 +83,6 @@ int			main(int argc, char const *argv[])
 	setup_controls(mlx_data);
 	plot_fractal(mlx_data, WIN_W, WIN_H);
 	mlx_loop(mlx_data->mlx_ptr);
+	delete_mlx(mlx_data);
 	return (0);
 }

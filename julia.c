@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/18 22:31:10 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/19 12:20:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	plot_julia(t_mlx_data *mlx_data, float width, float height)
 	t_complex c;
 	int i;
 
+	clear_frame_buffer(mlx_data->frame_buffer);
 	c.r = ft_map_range(mlx_data->mouse_x, ft_make_pair_d(0.0, width), ft_make_pair_d(-1.0, 1.0)); //-0.7;
 	c.i = ft_map_range(mlx_data->mouse_y, ft_make_pair_d(0.0, height), ft_make_pair_d(-1.0, 1.0)); //0.27015;
 	cur.y = 0;
@@ -65,5 +66,5 @@ void	plot_julia(t_mlx_data *mlx_data, float width, float height)
 		cur.y++;
 	}
 	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
-			mlx_data->frame_buffer->img, 0, 0);
+		mlx_data->frame_buffer->img, 0, 0);
 }
