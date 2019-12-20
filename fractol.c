@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/19 11:51:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:16:33 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,15 @@ static void			delete_mlx(t_mlx_data *mlx_data)
 
 void plot_fractal(t_mlx_data *mlx_data, int width, int height)
 {
+	clear_frame_buffer(mlx_data->frame_buffer);
 	if (mlx_data->fractal_type == FRAC_JULIA)
 		plot_julia(mlx_data, WIN_W, WIN_H);
 	else if (mlx_data->fractal_type == FRAC_MANDELBROT)
 		plot_mandelbrot(mlx_data, WIN_W, WIN_H);
 	else
 		plot_julia(mlx_data, WIN_W, WIN_H);
-
+	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
+		mlx_data->frame_buffer->img, 0, 0);
 }
 
 static int	render(void *param)

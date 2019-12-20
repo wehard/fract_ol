@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/18 22:47:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:42:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int mouse_move(int x, int y, void *param)
 		y = y < 0 ? 0 : WIN_H;
 	mlx_data->mouse_x = x;
 	mlx_data->mouse_y = y;
+	mlx_data->move_x = ft_map_range(x, ft_make_pair_d(0, WIN_W), ft_make_pair_d(-1.0, 1.0)) / -mlx_data->zoom;
+	mlx_data->move_y = ft_map_range(y, ft_make_pair_d(0, WIN_H), ft_make_pair_d(-1.0, 1.0)) / -mlx_data->zoom;
+	plot_fractal(mlx_data, WIN_W, WIN_H);
+
 	return (0);
 }
 
@@ -51,11 +55,14 @@ int 	mouse_press(int button, int x, int y, void *param)
 
 	mlx_data = (t_mlx_data*)param;
 
-	if (button == 4)
-		mlx_data->zoom += 0.01f;
-	if (button == 5)
-		mlx_data->zoom -= 0.01f;
-	plot_fractal(mlx_data, WIN_W, WIN_H);
+	if (button == 4 || button == 5)
+	{
+		if (button == 4)
+			mlx_data->zoom *= 1.1f;
+		if (button == 5)
+			mlx_data->zoom /= 1.1f;
+	}
+
 	return (0);
 }
 

@@ -6,21 +6,19 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/19 12:37:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:16:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "libft.h"
-
-/*
-public static float Remap (this float value, float from1, float to1, float from2, float to2) {
-    return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-}
-*/
+#include "ft_printf.h"
+#include "math.h"
 
 int			get_color(int i)
 {
+	int c;
+
 	const int color[16] = {
 		0xffff7d,
 		0xffee7d,
@@ -37,9 +35,8 @@ int			get_color(int i)
 		0xbe3f7f,
 		0xae2f7f,
 		0x9d1f7f,
-		0x8d0e7f
+		0
 	};
-	int c = (i / MAX_ITER) * 16;
-	//return (color[c]);
-	return (i << 16 | i << 8 | i);
+	c = 15 * (log(1 + i) / log(1 + MAX_ITER));
+	return (color[c]);
 }

@@ -6,16 +6,16 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/19 12:33:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:20:55 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_W 1000
-# define WIN_H 1000
-# define MAX_ITER 255
+# define WIN_W 500
+# define WIN_H 500
+# define MAX_ITER 30
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2

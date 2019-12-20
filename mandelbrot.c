@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/19 11:51:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:09:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	plot_mandelbrot(t_mlx_data *mlx_data, float width, float height)
 	t_complex c;
 	int i;
 
-	clear_frame_buffer(mlx_data->frame_buffer);
 	cur.y = 0;
 	while (cur.y < height)
 	{
@@ -65,6 +64,4 @@ void	plot_mandelbrot(t_mlx_data *mlx_data, float width, float height)
 		}
 		cur.y++;
 	}
-	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
-		mlx_data->frame_buffer->img, 0, 0);
 }
