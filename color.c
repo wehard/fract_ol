@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/20 16:16:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/20 16:47:29 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 #include "ft_printf.h"
 #include "math.h"
 
-int			get_color(int i)
+int	get_color(int i)
 {
-	int c;
-
-	const int color[16] = {
+	int			c;
+	const int	color[16] = {
 		0xffff7d,
 		0xffee7d,
 		0xffdf7e,
@@ -37,6 +36,7 @@ int			get_color(int i)
 		0x9d1f7f,
 		0
 	};
+
 	c = 15 * (log(1 + i) / log(1 + MAX_ITER));
 	return (color[c]);
 }
