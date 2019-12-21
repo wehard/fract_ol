@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/22 00:21:56 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/22 00:40:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_complex	make_complex(double r, double i)
 
 static int calc_mandelbrot(t_complex c)
 {
-	int i;
-	t_complex z;
-	double temp;
+	t_complex	z;
+	double		temp;
+	int			i;
 
 	z.r = 0.0;
 	z.i = 0.0;
