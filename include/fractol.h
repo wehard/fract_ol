@@ -15,10 +15,10 @@
 
 # include "point.h"
 
-# define WIN_W 500
-# define WIN_H 500
-# define NUM_THREADS 8
-# define MAX_ITER 255
+# define WIN_W 1280
+# define WIN_H 720
+# define NUM_THREADS 16
+# define MAX_ITER 128
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2
@@ -64,9 +64,11 @@ typedef struct		s_complex
 	double			i;
 }					t_complex;
 
+typedef void		*(*t_fractal_func)(void*);
+
 void 				plot_fractal(t_env *env, int width, int height);
-void				plot_mandelbrot(t_env *env, float width, float height);
-void				plot_julia(t_env *env, float width, float height);
+void				*plot_mandelbrot(void *env_ptr);
+void				*plot_julia(void *env_ptr);
 t_complex			make_complex(double r, double i);
 
 t_frame_buffer		*create_frame_buffer(t_env *env);

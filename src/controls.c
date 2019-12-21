@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 23:42:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/21 23:49:24 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ int mouse_move(int x, int y, void *param)
 		y = y < 0 ? 0 : WIN_H;
 	env->mouse_x = x;
 	env->mouse_y = y;
-	env->move_x = ft_map_range(x, ft_make_pair_d(0, WIN_W), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
-	env->move_y = ft_map_range(y, ft_make_pair_d(0, WIN_H), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
-	plot_fractal(env, WIN_W, WIN_H);
-
+	//env->move_x = ft_map_range(x, ft_make_pair_d(0, WIN_W), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
+	//env->move_y = ft_map_range(y, ft_make_pair_d(0, WIN_H), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
+	//plot_fractal(env, WIN_W, WIN_H);
 	return (0);
 }
 
@@ -62,7 +61,7 @@ int 	mouse_press(int button, int x, int y, void *param)
 		if (button == 5)
 			env->zoom /= 1.1f;
 	}
-
+	plot_fractal(env, WIN_W, WIN_H);
 	return (0);
 }
 

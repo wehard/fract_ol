@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 23:47:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/22 00:23:27 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <mlx.h>
+#include "pthread.h"
 
 static int	ft_usage(void)
 {
@@ -59,15 +60,34 @@ static void			del_env(t_env *env)
 	exit(EXIT_SUCCESS);
 }
 
+static t_fractal_func get_fractal_function(t_env *env)
+{
+	if (env->fractal_type == FRAC_JULIA)
+		return (plot_julia);
+	else if (env->fractal_type == FRAC_MANDELBROT)
+		return (plot_mandelbrot);
+	else
+		return (plot_julia);
+}
+
 void plot_fractal(t_env *env, int width, int height)
 {
-	//clear_frame_buffer(env->frame_buffer);
-	if (env->fractal_type == FRAC_JULIA)
-		plot_julia(env, WIN_W, WIN_H);
-	else if (env->fractal_type == FRAC_MANDELBROT)
-		plot_mandelbrot(env, WIN_W, WIN_H);
-	else
-		plot_julia(env, WIN_W, WIN_H);
+	pthread_t 	threads[NUM_THREADS];
+	t_env		thread_env[NUM_THREADS];
+	int i;
+
+	i = 0;
+	while (i < NUM_THREADS)
+	{
+		ft_memcpy((void*)&thread_env[i], (void*)env, sizeof(t_env));
+		thread_env[i].thread_index = i;
+		thread_env[i].thread_range_start = i * (height / NUM_THREADS);
+		thread_env[i].thread_range_end = (i + 1) * (height / NUM_THREADS);
+		pthread_create(&threads[i], NULL, get_fractal_function(env), &thread_env[i]);
+		i++;
+	}
+	while (i--)
+		pthread_join(threads[i], NULL);
 	mlx_put_image_to_window(env->mlx->mlx_ptr, env->mlx->win_ptr,
 		env->frame_buffer->img, 0, 0);
 }

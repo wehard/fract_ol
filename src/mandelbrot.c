@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 22:51:40 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/22 00:21:56 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int calc_mandelbrot(t_complex c)
 	t_complex z;
 	double temp;
 
-
 	z.r = 0.0;
 	z.i = 0.0;
 	i = 0;
@@ -44,24 +43,27 @@ static int calc_mandelbrot(t_complex c)
 	return (i);
 }
 
-void	plot_mandelbrot(t_env *env, float width, float height)
+void	*plot_mandelbrot(void *env_ptr)
 {
+	t_env	*env;
 	t_p2i cur;
 	t_complex c;
 	int i;
+	env = (t_env*)env_ptr;
 
-	cur.y = 0;
-	while (cur.y < height)
+	cur.y = env->thread_range_start;
+	while (cur.y < env->thread_range_end)
 	{
 		cur.x = 0;
-		while (cur.x < width)
+		while (cur.x < env->width)
 		{
-			c.r = (cur.x - width / 2) / (0.5 * env->zoom * width) + env->move_x;
-			c.i = (cur.y - height / 2) / (0.5 * env->zoom * height) + env->move_y;
+			c.r = (cur.x - WIN_W / 2) / (0.5 * env->zoom * WIN_W) + env->move_x;
+			c.i = (cur.y - WIN_H / 2) / (0.5 * env->zoom * WIN_W) + env->move_y;
 			i = calc_mandelbrot(c);
 			frame_buffer_set(env->frame_buffer, cur.x, cur.y, get_color(i));
 			cur.x++;
 		}
 		cur.y++;
 	}
+	return (env_ptr);
 }
