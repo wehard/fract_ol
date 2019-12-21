@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 15:54:39 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/21 23:47:40 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,67 +24,78 @@ static int	ft_usage(void)
 	return (1);
 }
 
-static t_mlx_data	*ft_init_mlx_data(char *title, int w, int h)
+static t_env	*init_env(char *title, int w, int h)
 {
-	t_mlx_data *mlx_data;
-	mlx_data = (t_mlx_data*)malloc(sizeof(t_mlx_data));
-	mlx_data->mlx_ptr = mlx_init();
-	mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, w, h, title);
-	mlx_data->frame_buffer = create_frame_buffer(mlx_data);
-	mlx_data->zoom = 0.5;
-	mlx_data->move_x = 0.0;
-	mlx_data->move_y = 0.0;
-	mlx_data->mouse_x = WIN_W;
-	mlx_data->mouse_y = WIN_H;
-	return (mlx_data);
+	int 	i;
+	t_env	*env;
+
+	env = (t_env*)malloc(sizeof(t_env));
+	env->mlx = (t_mlx*)malloc(sizeof(t_mlx));
+	env->mlx->mlx_ptr = mlx_init();
+	env->mlx->win_ptr = mlx_new_window(env->mlx->mlx_ptr, w, h, title);
+	env->width = w;
+	env->height = h;
+	env->thread_index = 0;
+	//env->thread_data = (int*)malloc(sizeof(int*) * NUM_THREADS);
+	//i = 0;
+	//while (i < NUM_THREADS)
+	//	env->thread_data[i++] = malloc(sizeof(int) * (w * (h / NUM_THREADS)));
+	env->frame_buffer = create_frame_buffer(env);
+	env->zoom = 0.5;
+	env->move_x = 0.0;
+	env->move_y = 0.0;
+	env->mouse_x = WIN_W;
+	env->mouse_y = WIN_H;
+	return (env);
 }
 
-static void			delete_mlx(t_mlx_data *mlx_data)
+static void			del_env(t_env *env)
 {
-	mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
-	mlx_destroy_image(mlx_data->mlx_ptr, mlx_data->frame_buffer->img);
-	free(mlx_data->frame_buffer);
-	free(mlx_data);
+	mlx_destroy_window(env->mlx->mlx_ptr, env->mlx->win_ptr);
+	mlx_destroy_image(env->mlx->mlx_ptr, env->frame_buffer->img);
+	free(env->mlx);
+	free(env->frame_buffer);
+	free(env);
 	exit(EXIT_SUCCESS);
 }
 
-void plot_fractal(t_mlx_data *mlx_data, int width, int height)
+void plot_fractal(t_env *env, int width, int height)
 {
-	//clear_frame_buffer(mlx_data->frame_buffer);
-	if (mlx_data->fractal_type == FRAC_JULIA)
-		plot_julia(mlx_data, WIN_W, WIN_H);
-	else if (mlx_data->fractal_type == FRAC_MANDELBROT)
-		plot_mandelbrot(mlx_data, WIN_W, WIN_H);
+	//clear_frame_buffer(env->frame_buffer);
+	if (env->fractal_type == FRAC_JULIA)
+		plot_julia(env, WIN_W, WIN_H);
+	else if (env->fractal_type == FRAC_MANDELBROT)
+		plot_mandelbrot(env, WIN_W, WIN_H);
 	else
-		plot_julia(mlx_data, WIN_W, WIN_H);
-	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
-		mlx_data->frame_buffer->img, 0, 0);
+		plot_julia(env, WIN_W, WIN_H);
+	mlx_put_image_to_window(env->mlx->mlx_ptr, env->mlx->win_ptr,
+		env->frame_buffer->img, 0, 0);
 }
 
 static int	render(void *param)
 {
-	t_mlx_data *mlx_data;
+	t_env *env;
 
-	mlx_data = (t_mlx_data*)param;
+	env = (t_env*)param;
 
 	return (0);
 }
 
 int			main(int argc, char const *argv[])
 {
-	t_mlx_data *mlx_data;
+	t_env *env;
 
 	if (argc == 2)
 	{
-		mlx_data = ft_init_mlx_data("fract_ol", WIN_W, WIN_H);
-		mlx_data->fractal_type = ft_atoi(argv[1]);
+		env = init_env("fract_ol", WIN_W, WIN_H);
+		env->fractal_type = ft_atoi(argv[1]);
 	}
 	else
 		return (ft_usage());
 
-	setup_controls(mlx_data);
-	plot_fractal(mlx_data, WIN_W, WIN_H);
-	mlx_loop(mlx_data->mlx_ptr);
-	delete_mlx(mlx_data);
+	setup_controls(env);
+	plot_fractal(env, WIN_W, WIN_H);
+	mlx_loop(env->mlx->mlx_ptr);
+	del_env(env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 10:34:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 11:40:43 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/21 22:51:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			frame_buffer_set(t_frame_buffer *fb, int x, int y, int c)
 	*(int*)(fb->d_addr + (((y * WIN_W) + x) * fb->bpp)) = c;
 }
 
-t_frame_buffer	*create_frame_buffer(t_mlx_data *mlx_data)
+t_frame_buffer	*create_frame_buffer(t_env *env)
 {
 	t_frame_buffer *fb;
 
@@ -33,7 +33,7 @@ t_frame_buffer	*create_frame_buffer(t_mlx_data *mlx_data)
 	}
 	fb->w = WIN_W;
 	fb->h = WIN_H;
-	if (!(fb->img = mlx_new_image(mlx_data->mlx_ptr, fb->w, fb->h)))
+	if (!(fb->img = mlx_new_image(env->mlx->mlx_ptr, fb->w, fb->h)))
 	{
 		ft_putendl_fd("error: mlx_new_image failed!", 2);
 		return (NULL);

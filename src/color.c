@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/20 16:47:29 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/21 23:44:32 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ int	get_color(int i)
 	};
 
 	c = 15 * (log(1 + i) / log(1 + MAX_ITER));
+	if (c > 15)
+		c = 0;
+	if (c < 0)
+		c = 15;
 	return (color[c]);
 }

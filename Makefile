@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/21 17:40:49 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/21 23:25:38 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ libft:
 	make re -C $(LIBFT)
 
 linux:
-	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lXext -lX11 -lm
+	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lXext -lX11 -lm -lpthread
 
 clean:
 	@printf "Removing objects\n"
