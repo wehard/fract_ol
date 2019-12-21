@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 10:34:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/19 12:19:21 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/21 11:40:43 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void			clear_frame_buffer(t_frame_buffer *fb)
 {
 	if (!fb || !fb->d_addr)
 		return ;
-	ft_memset(fb->d_addr, 255, fb->w * fb->h * fb->bpp);
+	ft_memset(fb->d_addr, 0, fb->w * fb->h * fb->bpp);
 }
