@@ -17,8 +17,8 @@
 
 # define WIN_W 1280
 # define WIN_H 720
-# define NUM_THREADS 16
-# define MAX_ITER 128
+# define NUM_THREADS 8
+# define MAX_ITER 255
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2
