@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 23:49:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/23 17:38:19 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 int			key_press(int key, void *param)
 {
 	t_env *env;
+	float move;
 
+	move = 0.01f;
 	env = (t_env*)param;
 	if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
@@ -27,6 +29,14 @@ int			key_press(int key, void *param)
 		env->fractal_type = FRAC_JULIA;
 	if (key == KEY_2)
 		env->fractal_type = FRAC_MANDELBROT;
+	if (key == KEY_LEFT)
+		env->move_x += move * env->zoom;
+	if (key == KEY_RIGHT)
+		env->move_x -= move * env->zoom;
+	if (key == KEY_DOWN)
+		env->move_y -= move * env->zoom;
+	if (key == KEY_UP)
+		env->move_y += move * env->zoom;
 	plot_fractal(env, WIN_W, WIN_H);
 	return (0);
 }

@@ -18,10 +18,12 @@
 # define WIN_W 1280
 # define WIN_H 720
 # define NUM_THREADS 8
-# define MAX_ITER 255
+# define MAX_ITER 32
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2
+# define HUD_BG 0x404040
+# define HUD_FG 0x808080
 
 typedef struct		s_frame_buffer
 {
@@ -83,5 +85,7 @@ int 				mouse_move(int x, int y, void *param);
 int					key_press(int key, void *param);
 
 int					get_color(int i);
+
+void				draw_hud(t_env *env);
 
 #endif

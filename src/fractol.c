@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/22 00:23:27 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/23 18:04:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_env	*init_env(char *title, int w, int h)
 	env->mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	env->mlx->mlx_ptr = mlx_init();
 	env->mlx->win_ptr = mlx_new_window(env->mlx->mlx_ptr, w, h, title);
-	env->width = w;
+	env->width = w/3*2;
 	env->height = h;
 	env->thread_index = 0;
 	//env->thread_data = (int*)malloc(sizeof(int*) * NUM_THREADS);
@@ -90,6 +90,7 @@ void plot_fractal(t_env *env, int width, int height)
 		pthread_join(threads[i], NULL);
 	mlx_put_image_to_window(env->mlx->mlx_ptr, env->mlx->win_ptr,
 		env->frame_buffer->img, 0, 0);
+	draw_hud(env);
 }
 
 static int	render(void *param)

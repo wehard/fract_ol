@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/22 17:50:24 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/23 18:06:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int calc_julia(t_env *env, t_complex c, t_p2i cur)
 	t_complex t;
 
 	//calculate the initial real and imaginary part of z, based on the pixel location and zoom and position values
-	z.r = (cur.x - WIN_W / 2) / (0.5 * env->zoom * WIN_W) + env->move_x;
-	z.i = (cur.y - WIN_H / 2) / (0.5 * env->zoom * WIN_W) + env->move_y;
+	z.r = (cur.x - env->width / 2) / (0.5 * env->zoom * env->width) + env->move_x;
+	z.i = (cur.y - env->height / 2) / (0.5 * env->zoom * env->width) + env->move_y;
 	//i will represent the number of iterations
 	//start the iteration process
 	i = 0;
