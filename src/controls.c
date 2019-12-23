@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/23 17:38:19 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/24 01:18:20 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ int			key_press(int key, void *param)
 	if (key == KEY_2)
 		env->fractal_type = FRAC_MANDELBROT;
 	if (key == KEY_LEFT)
-		env->move_x += move * env->zoom;
+		env->move_x += move / env->zoom;
 	if (key == KEY_RIGHT)
-		env->move_x -= move * env->zoom;
+		env->move_x -= move / env->zoom;
 	if (key == KEY_DOWN)
-		env->move_y -= move * env->zoom;
+		env->move_y -= move / env->zoom;
 	if (key == KEY_UP)
-		env->move_y += move * env->zoom;
+		env->move_y += move / env->zoom;
+	if (key == KEY_P)
+		env->color_palette < NUM_PALETTE - 1 ? (env->color_palette++) : (env->color_palette = 0);
 	plot_fractal(env, WIN_W, WIN_H);
 	return (0);
 }

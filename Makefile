@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/23 17:52:01 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/24 00:15:03 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = fractol.c\
 		controls.c\
-		frame_buffer.c\
+		image.c\
 		mandelbrot.c\
 		julia.c\
 		point.c\

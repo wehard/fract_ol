@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/23 18:06:52 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/24 01:15:31 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	*plot_julia(void *env_ptr)
 		while(cur.x < env->width)
 		{
 			i = calc_julia(env, c, cur);
-			frame_buffer_set(env->frame_buffer, cur.x, cur.y, get_color(i));
+			if (i != MAX_ITER)
+				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->color_palette));
+			else
+				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, 0);
 			cur.x++;
   		}
 		cur.y++;

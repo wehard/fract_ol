@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 23:44:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/24 01:10:49 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 #include "ft_printf.h"
 #include "math.h"
 
-int	get_color(int i)
+static int get_palette_color_warm(int i)
 {
-	int			c;
 	const int	color[16] = {
 		0xffff7d,
 		0xffee7d,
@@ -37,10 +36,48 @@ int	get_color(int i)
 		0
 	};
 
+	return (color[i]);
+}
+
+static int get_palette_color_ultra(int i)
+{
+	const int	color[16] = {
+		0x3C1E0F,
+		0x19111A,
+		0x09012F,
+		0x040449,
+		0x000764,
+		0x0C2C8A,
+		0x1852B1,
+		0x397DD1,
+		0x86B5E5,
+		0xD3ECF8,
+		0xF1E9BF,
+		0xF8C95F,
+		0xFFAA00,
+		0xCC8000,
+		0x995700,
+		0x6A3403
+	};
+
+	return (color[i]);
+}
+
+int	get_color(int i, int palette)
+{
+	int			c;
+
 	c = 15 * (log(1 + i) / log(1 + MAX_ITER));
 	if (c > 15)
 		c = 0;
 	if (c < 0)
 		c = 15;
-	return (color[c]);
+	if (palette == 0)
+		return (get_palette_color_warm(c));
+	else if (palette == 1)
+		return (get_palette_color_ultra(c));
+	else if (palette == 2)
+		return (0);
+	else
+		return (0x7FFFFF);
 }

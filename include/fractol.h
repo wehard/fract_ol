@@ -18,12 +18,14 @@
 # define WIN_W 1280
 # define WIN_H 720
 # define NUM_THREADS 8
-# define MAX_ITER 32
+# define NUM_PALETTE 3
+# define MAX_ITER 255
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2
+# define HUD_TEXT 0xFFFFFF
 # define HUD_BG 0x404040
-# define HUD_FG 0x808080
+# define HUD_FG 0x606060
 
 typedef struct		s_frame_buffer
 {
@@ -36,6 +38,17 @@ typedef struct		s_frame_buffer
 	int				h;
 }					t_frame_buffer;
 
+typedef struct		s_mlx_img
+{
+	void			*img;
+	char			*d_addr;
+	int				bpp;
+	int				size_line;
+	int				endian;
+	int				w;
+	int				h;
+}					t_mlx_img;
+
 typedef struct		s_mlx
 {
 	void			*mlx_ptr;
@@ -45,7 +58,8 @@ typedef struct		s_mlx
 typedef struct		s_env
 {
 	t_mlx			*mlx;
-	t_frame_buffer	*frame_buffer;
+	t_mlx_img		*fractal_img;
+	t_mlx_img		*hud_img;
 	int				thread_index;
 	int				**thread_data;
 	int				thread_range_start;
@@ -58,6 +72,7 @@ typedef struct		s_env
 	double			zoom;
 	double			move_x;
 	double			move_y;
+	int				color_palette;
 }					t_env;
 
 typedef struct		s_complex
@@ -73,9 +88,9 @@ void				*plot_mandelbrot(void *env_ptr);
 void				*plot_julia(void *env_ptr);
 t_complex			make_complex(double r, double i);
 
-t_frame_buffer		*create_frame_buffer(t_env *env);
-void				frame_buffer_set(t_frame_buffer *fb, int x, int y, int c);
-void				clear_frame_buffer(t_frame_buffer *fb);
+t_mlx_img			*create_mlx_image(t_env *env, int width, int height);
+void				clear_mlx_img(t_mlx_img *img);
+void				put_pixel_mlx_img(t_mlx_img *img, int x, int y, int c);
 
 void				setup_controls(t_env *env);
 int 				close(void *param);
@@ -84,7 +99,7 @@ int 				mouse_press(int button, int x, int y, void *param);
 int 				mouse_move(int x, int y, void *param);
 int					key_press(int key, void *param);
 
-int					get_color(int i);
+int					get_color(int i, int palette);
 
 void				draw_hud(t_env *env);
 

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 20:37:20 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/17 20:42:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/24 00:39:45 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #  define KEY_1			49
 #  define KEY_2			50
 #  define KEY_L			108
+#  define KEY_P			108
 
 # else
 
@@ -46,6 +47,7 @@
 #  define KEY_1			18
 #  define KEY_2			19
 #  define KEY_L			37
+#  define KEY_P			37
 
 # endif
 
