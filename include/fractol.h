@@ -27,7 +27,8 @@
 # define HUD_TEXT 0xFFFFFF
 # define HUD_BG 0x404040
 # define HUD_FG 0x606060
-# define HUD_BTN 0xFFFFFF
+# define HUD_BTN_S 0x8888FF
+# define HUD_BTN 0x1010FF
 
 typedef struct		s_frame_buffer
 {
@@ -62,6 +63,7 @@ typedef struct		s_ui_button
 	t_p2i			pos;
 	t_p2i			size;
 	char			*label;
+	int				selected;
 }					t_ui_button;
 
 typedef struct		s_env
