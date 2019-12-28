@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/28 14:37:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/28 16:25:53 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ static t_env	*init_env(char *title, int w, int h)
 	//while (i < NUM_THREADS)
 	//	env->thread_data[i++] = malloc(sizeof(int) * (w * (h / NUM_THREADS)));
 	env->fractal_img = create_mlx_image(env, env->width, env->height);
-	env->hud_img = create_mlx_image(env, w / 3, h);
-
 	env->zoom = 0.5;
 	env->move_x = 0.0;
 	env->move_y = 0.0;
 	env->mouse_x = WIN_W;
 	env->mouse_y = WIN_H;
 	env->color_palette = 0;
-	create_ui_buttons(env);
+	ui_init(env);
 	return (env);
 }
 
@@ -58,10 +56,12 @@ static void			del_env(t_env *env)
 {
 	mlx_destroy_window(env->mlx->mlx_ptr, env->mlx->win_ptr);
 	mlx_destroy_image(env->mlx->mlx_ptr, env->fractal_img->img);
-	mlx_destroy_image(env->mlx->mlx_ptr, env->hud_img->img);
+	mlx_destroy_image(env->mlx->mlx_ptr, env->ui->img->img);
 	free(env->mlx);
 	free(env->fractal_img);
-	free(env->hud_img);
+	free(env->ui->img);
+	free(env->ui->buttons);
+	free(env->ui);
 	free(env);
 	exit(EXIT_SUCCESS);
 }
@@ -96,7 +96,7 @@ void plot_fractal(t_env *env, int width, int height)
 		pthread_join(threads[i], NULL);
 	mlx_put_image_to_window(env->mlx->mlx_ptr, env->mlx->win_ptr,
 		env->fractal_img->img, 0, 0);
-	draw_hud(env);
+	draw_ui(env);
 }
 
 static int	render(void *param)

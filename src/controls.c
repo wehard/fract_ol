@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/24 01:18:20 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/28 17:19:30 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,25 @@ int mouse_move(int x, int y, void *param)
 	//env->move_x = ft_map_range(x, ft_make_pair_d(0, WIN_W), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
 	//env->move_y = ft_map_range(y, ft_make_pair_d(0, WIN_H), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
 	//plot_fractal(env, WIN_W, WIN_H);
+	int i;
+	i = 0;
+	while (i < 4)
+	{
+		t_p2i pos = env->ui->pos;
+		pos.x +=  env->ui->buttons[i].pos.x;
+		pos.y +=  env->ui->buttons[i].pos.y;
+		t_p2i size = env->ui->buttons[i].size;
+		if ((x > pos.x && x < pos.x + size.x) && (y > pos.y && y < pos.y + size.y))
+		{
+			env->ui->buttons[i].selected = 1;
+		}
+		else
+		{
+			env->ui->buttons[i].selected = 0;
+		}
+		i++;
+	}
+
 	return (0);
 }
 

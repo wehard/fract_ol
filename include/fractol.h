@@ -24,11 +24,11 @@
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_POOP 2
-# define HUD_TEXT 0xFFFFFF
-# define HUD_BG 0x404040
-# define HUD_FG 0x606060
-# define HUD_BTN_S 0x8888FF
-# define HUD_BTN 0x1010FF
+# define UI_TEXT 0xFFFFFF
+# define UI_BG 0x404040
+# define UI_FG 0x606060
+# define UI_BTN_SELECTED 0x8888FF
+# define UI_BTN 0x1010FF
 
 typedef struct		s_frame_buffer
 {
@@ -66,18 +66,24 @@ typedef struct		s_ui_button
 	int				selected;
 }					t_ui_button;
 
+typedef struct		s_ui
+{
+	t_mlx_img		*img;
+	t_ui_button		*buttons;
+	t_p2i			pos;
+}					t_ui;
+
 typedef struct		s_env
 {
 	t_mlx			*mlx;
+	t_ui			*ui;
 	t_mlx_img		*fractal_img;
-	t_mlx_img		*hud_img;
 	int				thread_index;
 	int				**thread_data;
 	int				thread_range_start;
 	int				thread_range_end;
 	int				width;
 	int				height;
-	t_ui_button		*ui_buttons;
 	int				mouse_x;
 	int				mouse_y;
 	int				fractal_type;
@@ -114,7 +120,6 @@ int					key_press(int key, void *param);
 
 int					get_color(int i, int palette);
 
-void				draw_hud(t_env *env);
-int					create_ui_buttons(t_env *env);
-
+void				draw_ui(t_env *env);
+int					ui_init(t_env *env);
 #endif

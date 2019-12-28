@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/24 00:15:03 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/28 16:03:49 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = fractol.c\
 		julia.c\
 		point.c\
 		color.c\
-		hud.c
+		ui.c
 
 SRCDIR = src
 
