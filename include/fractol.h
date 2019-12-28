@@ -13,6 +13,7 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include "libft.h"
 # include "point.h"
 
 # define WIN_W 1280
@@ -26,6 +27,7 @@
 # define HUD_TEXT 0xFFFFFF
 # define HUD_BG 0x404040
 # define HUD_FG 0x606060
+# define HUD_BTN 0xFFFFFF
 
 typedef struct		s_frame_buffer
 {
@@ -55,6 +57,13 @@ typedef struct		s_mlx
 	void			*win_ptr;
 }					t_mlx;
 
+typedef struct		s_ui_button
+{
+	t_p2i			pos;
+	t_p2i			size;
+	char			*label;
+}					t_ui_button;
+
 typedef struct		s_env
 {
 	t_mlx			*mlx;
@@ -66,6 +75,7 @@ typedef struct		s_env
 	int				thread_range_end;
 	int				width;
 	int				height;
+	t_ui_button		*ui_buttons;
 	int				mouse_x;
 	int				mouse_y;
 	int				fractal_type;
@@ -80,6 +90,7 @@ typedef struct		s_complex
 	double			r;
 	double			i;
 }					t_complex;
+
 
 typedef void		*(*t_fractal_func)(void*);
 
@@ -102,5 +113,6 @@ int					key_press(int key, void *param);
 int					get_color(int i, int palette);
 
 void				draw_hud(t_env *env);
+int					create_ui_buttons(t_env *env);
 
 #endif

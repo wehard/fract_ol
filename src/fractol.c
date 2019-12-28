@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/24 01:00:22 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/28 14:37:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ static t_env	*init_env(char *title, int w, int h)
 	//	env->thread_data[i++] = malloc(sizeof(int) * (w * (h / NUM_THREADS)));
 	env->fractal_img = create_mlx_image(env, env->width, env->height);
 	env->hud_img = create_mlx_image(env, w / 3, h);
+
 	env->zoom = 0.5;
 	env->move_x = 0.0;
 	env->move_y = 0.0;
 	env->mouse_x = WIN_W;
 	env->mouse_y = WIN_H;
 	env->color_palette = 0;
+	create_ui_buttons(env);
 	return (env);
 }
 
