@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 20:37:20 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 13:41:47 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 15:12:22 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 #  define KEY_DOWN		125
 #  define KEY_LEFT		123
 #  define KEY_RIGHT		124
+#  define KEY_SPACE		49
 #  define KEY_1			18
 #  define KEY_2			19
 #  define KEY_3			20

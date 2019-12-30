@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 14:43:34 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 16:20:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int calc_julia(t_env *env, t_complex c, t_p2i cur)
 	//i will represent the number of iterations
 	//start the iteration process
 	i = 0;
-	while(i < MAX_ITER)
+	while(i < env->iterations)
 	{
 		//remember value of previous iteration
 		t.r = z.r;
@@ -52,8 +52,8 @@ void	*plot_julia(void *env_ptr)
 	int i;
 	env = (t_env*)env_ptr;
 
-	c.r = ft_map_range(env->mouse_x, ft_make_pair_d(0.0, env->width), ft_make_pair_d(-1.0, 1.0)); //-0.7; //
-	c.i = ft_map_range(env->mouse_y, ft_make_pair_d(0.0, env->height), ft_make_pair_d(-1.0, 1.0)); //0.27015; //
+	c.r = env->free_julia ? ft_map_range(env->mouse_x, ft_make_pair_d(0.0, env->width), ft_make_pair_d(-1.0, 1.0)) : -0.7;
+	c.i = env->free_julia ? ft_map_range(env->mouse_y, ft_make_pair_d(0.0, env->height), ft_make_pair_d(-1.0, 1.0)) : 0.27015;
 	cur.y = env->thread_range_start;
 	while(cur.y < env->thread_range_end)
 	{
@@ -61,8 +61,8 @@ void	*plot_julia(void *env_ptr)
 		while(cur.x < env->width)
 		{
 			i = calc_julia(env, c, cur);
-			if (i != MAX_ITER)
-				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->color_palette));
+			if (i != env->iterations)
+				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->iterations, env->color_palette));
 			else
 				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, 0);
 			cur.x++;

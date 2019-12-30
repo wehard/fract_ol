@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 14:45:48 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 16:13:39 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			key_press(int key, void *param)
 	t_env *env;
 	float move;
 
-	move = 0.01f;
+	move = 0.05f;
 	env = (t_env*)param;
 	if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
@@ -39,8 +39,13 @@ int			key_press(int key, void *param)
 		env->move_y -= move / env->zoom;
 	if (key == KEY_UP)
 		env->move_y += move / env->zoom;
+	if (key == KEY_SPACE)
+		env->free_julia = !env->free_julia;
 	if (key == KEY_P)
 		env->color_palette < NUM_PALETTE - 1 ? (env->color_palette++) : (env->color_palette = 0);
+	if (key == KEY_NUM_PLUS || key == KEY_NUM_MINUS)
+		key == KEY_NUM_PLUS ? env->iterations++ : env->iterations--;
+	env->ui->buttons[env->fractal_type].selected = 1;
 	plot_fractal(env, WIN_W, WIN_H);
 	return (0);
 }
@@ -56,9 +61,8 @@ int mouse_move(int x, int y, void *param)
 		y = y < 0 ? 0 : WIN_H;
 	env->mouse_x = x;
 	env->mouse_y = y;
-	//env->move_x = ft_map_range(x, ft_make_pair_d(0, WIN_W), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
-	//env->move_y = ft_map_range(y, ft_make_pair_d(0, WIN_H), ft_make_pair_d(-1.0, 1.0)) / -env->zoom;
-	//plot_fractal(env, WIN_W, WIN_H);
+	if (env->fractal_type == FRAC_JULIA && env->free_julia)
+		plot_fractal(env, WIN_W, WIN_H);
 	int i;
 	i = 0;
 	while (i < 4)

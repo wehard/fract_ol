@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 13:11:09 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 16:20:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ static int	get_palette_color_bw(int i)
 	return (color[i]);
 }
 
-int			get_color(int i, int palette)
+int			get_color(int i, int iterations, int palette)
 {
 	int			c;
 
-	c = 15 * (log(1 + i) / log(1 + MAX_ITER));
+	c = 15 * (log(1 + i) / log(1 + iterations));
 	if (c > 15)
 		c = 0;
 	if (c < 0)

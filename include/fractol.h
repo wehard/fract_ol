@@ -24,10 +24,9 @@
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
 # define FRAC_BURNING_SHIP 2
-# define FRAC_POOP 2
 # define UI_TEXT 0xFFFFFF
-# define UI_BG 0x404040
-# define UI_FG 0x606060
+# define UI_BG 0x202020
+# define UI_FG 0x303030
 # define UI_BTN_SELECTED 0x8888FF
 # define UI_BTN 0x1010FF
 
@@ -81,6 +80,8 @@ typedef struct		s_env
 	double			move_x;
 	double			move_y;
 	int				color_palette;
+	int				free_julia;
+	int				iterations;
 }					t_env;
 
 typedef struct		s_complex
@@ -109,7 +110,7 @@ int 				mouse_press(int button, int x, int y, void *param);
 int 				mouse_move(int x, int y, void *param);
 int					key_press(int key, void *param);
 
-int					get_color(int i, int palette);
+int					get_color(int i, int iterations, int palette);
 
 void				draw_ui(t_env *env);
 int					ui_init(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 13:40:17 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 16:16:10 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ static t_env	*init_env(char *title, int w, int h)
 	env->mlx->win_ptr = mlx_new_window(env->mlx->mlx_ptr, w, h, title);
 	env->width = w/3*2;
 	env->height = h;
+	env->iterations = MAX_ITER;
 	env->thread_index = 0;
-	//env->thread_data = (int*)malloc(sizeof(int*) * NUM_THREADS);
-	//i = 0;
-	//while (i < NUM_THREADS)
-	//	env->thread_data[i++] = malloc(sizeof(int) * (w * (h / NUM_THREADS)));
 	env->fractal_img = create_mlx_image(env, env->width, env->height);
 	env->zoom = 0.5;
 	env->move_x = 0.0;
@@ -48,6 +45,7 @@ static t_env	*init_env(char *title, int w, int h)
 	env->mouse_x = WIN_W;
 	env->mouse_y = WIN_H;
 	env->color_palette = 0;
+	env->free_julia = 0;
 	ui_init(env);
 	return (env);
 }
