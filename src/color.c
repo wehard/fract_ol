@@ -6,16 +6,14 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/24 01:10:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 13:11:09 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "libft.h"
-#include "ft_printf.h"
 #include "math.h"
 
-static int get_palette_color_warm(int i)
+static int	get_palette_color_warm(int i)
 {
 	const int	color[16] = {
 		0xffff7d,
@@ -39,7 +37,7 @@ static int get_palette_color_warm(int i)
 	return (color[i]);
 }
 
-static int get_palette_color_ultra(int i)
+static int	get_palette_color_ultra(int i)
 {
 	const int	color[16] = {
 		0x3C1E0F,
@@ -63,7 +61,31 @@ static int get_palette_color_ultra(int i)
 	return (color[i]);
 }
 
-int	get_color(int i, int palette)
+static int	get_palette_color_bw(int i)
+{
+	const int	color[16] = {
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0,
+		0xffffff,
+		0
+	};
+
+	return (color[i]);
+}
+
+int			get_color(int i, int palette)
 {
 	int			c;
 
@@ -77,7 +99,7 @@ int	get_color(int i, int palette)
 	else if (palette == 1)
 		return (get_palette_color_ultra(c));
 	else if (palette == 2)
-		return (0);
+		return (get_palette_color_bw(c));
 	else
 		return (0x7FFFFF);
 }

@@ -14,8 +14,6 @@
 #include "mlx.h"
 #include <stdlib.h>
 
-
-
 static t_ui_button	create_ui_button(t_p2i pos, t_p2i size, char *label)
 {
 	t_ui_button button;
@@ -32,10 +30,10 @@ static int			create_ui_buttons(t_ui *ui)
 	if (!ui)
 		return (0);
 	ui->buttons = malloc(sizeof(t_ui_button) * 4);
-	ui->buttons[0] = create_ui_button(make_p2i(0, 60), make_p2i(100, 50), "BUTTON0");
-	ui->buttons[1] = create_ui_button(make_p2i(110, 60), make_p2i(100, 50), "BUTTON1");
-	ui->buttons[2] = create_ui_button(make_p2i(220, 60), make_p2i(100, 50), "BUTTON2");
-	ui->buttons[3] = create_ui_button(make_p2i(330, 60), make_p2i(100, 50), "BUTTON3");
+	ui->buttons[0] = create_ui_button(make_p2i(10, 60), make_p2i(60, 40), "0");
+	ui->buttons[1] = create_ui_button(make_p2i(80, 60), make_p2i(60, 40), "1");
+	ui->buttons[2] = create_ui_button(make_p2i(150, 60), make_p2i(60, 40), "2");
+	ui->buttons[3] = create_ui_button(make_p2i(220, 60), make_p2i(60, 40), "3");
 	return (1);
 }
 
@@ -78,14 +76,14 @@ static void draw_ui_buttons(t_ui *ui)
 static void draw_ui_button_labels(t_env *env, t_ui *ui)
 {
 	int i;
-	t_p2i button_pos;
+	t_p2i label_pos;
 
 	i = 0;
 	while (i < 4)
 	{
-		button_pos.x = ui->pos.x + ui->buttons[i].pos.x;
-		button_pos.y = ui->pos.y + ui->buttons[i].pos.y;
-		mlx_string_put(env->mlx->mlx_ptr, env->mlx->win_ptr, button_pos.x + 30, button_pos.y + 30, UI_TEXT, ui->buttons[i].label);
+		label_pos.x = ui->pos.x + ui->buttons[i].pos.x + (ui->buttons[i].size.x / 2) - 5;
+		label_pos.y = ui->pos.y + ui->buttons[i].pos.y + (ui->buttons[i].size.y / 2) - 10;
+		mlx_string_put(env->mlx->mlx_ptr, env->mlx->win_ptr, label_pos.x, label_pos.y, UI_TEXT, ui->buttons[i].label);
 		i++;
 	}
 }
@@ -97,6 +95,7 @@ int			ui_init(t_env *env)
 	env->ui->pos = make_p2i((WIN_W / 3) * 2, 0);
 	env->ui->img = create_mlx_image(env, WIN_W / 3, WIN_H);
 	create_ui_buttons(env->ui);
+	return (1);
 }
 
 void	draw_ui(t_env *env)

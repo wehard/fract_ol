@@ -16,8 +16,8 @@
 # include "libft.h"
 # include "point.h"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1200
+# define WIN_H 800
 # define NUM_THREADS 8
 # define NUM_PALETTE 3
 # define MAX_ITER 255
@@ -29,17 +29,6 @@
 # define UI_FG 0x606060
 # define UI_BTN_SELECTED 0x8888FF
 # define UI_BTN 0x1010FF
-
-typedef struct		s_frame_buffer
-{
-	void			*img;
-	char			*d_addr;
-	int				bpp;
-	int				size_line;
-	int				endian;
-	int				w;
-	int				h;
-}					t_frame_buffer;
 
 typedef struct		s_mlx_img
 {

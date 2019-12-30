@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/28 17:19:30 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 13:16:38 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ void	setup_controls(t_env *env)
 	mlx_hook(env->mlx->win_ptr, 4, (1L<<2), mouse_press, (void*)env);
 	mlx_hook(env->mlx->win_ptr, 6, (1L<<6), mouse_move, (void*)env);
 	mlx_hook(env->mlx->win_ptr, 12, 0, expose, (void*)env);
-	//mlx_mouse_hook(env->win_ptr, mouse_move, (void*)env);
 	mlx_hook(env->mlx->win_ptr, 17, (1L << 17), close, (void*)env);
 }
