@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/28 16:03:49 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/30 14:37:11 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = fractol.c\
 		controls.c\
 		image.c\
-		mandelbrot.c\
 		julia.c\
+		mandelbrot.c\
+		burning_ship.c\
 		point.c\
 		color.c\
 		ui.c
@@ -43,6 +44,9 @@ $(NAME):
 
 libft:
 	make re -C $(LIBFT)
+
+debug:
+	gcc -g $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lm -pthread -framework OpenGL -framework AppKit
 
 linux:
 	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lXext -lX11 -lm -lpthread

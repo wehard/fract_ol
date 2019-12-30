@@ -23,6 +23,7 @@
 # define MAX_ITER 255
 # define FRAC_JULIA 0
 # define FRAC_MANDELBROT 1
+# define FRAC_BURNING_SHIP 2
 # define FRAC_POOP 2
 # define UI_TEXT 0xFFFFFF
 # define UI_BG 0x404040
@@ -92,8 +93,9 @@ typedef struct		s_complex
 typedef void		*(*t_fractal_func)(void*);
 
 void 				plot_fractal(t_env *env, int width, int height);
-void				*plot_mandelbrot(void *env_ptr);
 void				*plot_julia(void *env_ptr);
+void				*plot_mandelbrot(void *env_ptr);
+void				*plot_burning_ship(void *env_ptr);
 t_complex			make_complex(double r, double i);
 
 t_mlx_img			*create_mlx_image(t_env *env, int width, int height);

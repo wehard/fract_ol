@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 13:16:38 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:45:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int			key_press(int key, void *param)
 		env->fractal_type = FRAC_JULIA;
 	if (key == KEY_2)
 		env->fractal_type = FRAC_MANDELBROT;
+	if (key == KEY_3)
+		env->fractal_type = FRAC_BURNING_SHIP;
 	if (key == KEY_LEFT)
 		env->move_x += move / env->zoom;
 	if (key == KEY_RIGHT)
@@ -87,10 +89,10 @@ int 	mouse_press(int button, int x, int y, void *param)
 
 	if (button == 4 || button == 5)
 	{
-		if (button == 4)
-			env->zoom *= 1.1f;
 		if (button == 5)
-			env->zoom /= 1.1f;
+			env->zoom *= 1.1f;
+		if (button == 4)
+			env->zoom *= 0.9f;
 	}
 	plot_fractal(env, WIN_W, WIN_H);
 	return (0);

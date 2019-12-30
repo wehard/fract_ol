@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/28 16:25:53 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 13:40:17 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_usage(void)
 	ft_putendl("usage: ./fract_ol <fractal type>");
 	ft_putendl("\t0: julia");
 	ft_putendl("\t1: mandelbrot");
-	ft_putendl("\t2: poop");
+	ft_putendl("\t2: burning ship");
 	return (1);
 }
 
@@ -72,6 +72,8 @@ static t_fractal_func get_fractal_function(t_env *env)
 		return (plot_julia);
 	else if (env->fractal_type == FRAC_MANDELBROT)
 		return (plot_mandelbrot);
+	else if (env->fractal_type == FRAC_BURNING_SHIP)
+		return (plot_burning_ship);
 	else
 		return (plot_julia);
 }

@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 20:37:20 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 13:13:14 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 13:41:47 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 #  define KEY_RIGHT		124
 #  define KEY_1			18
 #  define KEY_2			19
+#  define KEY_3			20
 #  define KEY_L			37
 #  define KEY_P			35
 
