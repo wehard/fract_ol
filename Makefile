@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/30 14:37:11 by wkorande         ###   ########.fr        #
+#    Updated: 2019/12/30 17:33:32 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = fractol.c\
+		env.c\
 		controls.c\
 		image.c\
 		julia.c\

@@ -21,14 +21,12 @@
 # define NUM_THREADS 8
 # define NUM_PALETTE 3
 # define MAX_ITER 255
-# define FRAC_JULIA 0
-# define FRAC_MANDELBROT 1
-# define FRAC_BURNING_SHIP 2
+# define FRAC_JULIA 1
+# define FRAC_MANDELBROT 2
+# define FRAC_BURNING_SHIP 3
 # define UI_TEXT 0xFFFFFF
 # define UI_BG 0x202020
 # define UI_FG 0x303030
-# define UI_BTN_SELECTED 0x8888FF
-# define UI_BTN 0x1010FF
 
 typedef struct		s_mlx_img
 {
@@ -47,18 +45,9 @@ typedef struct		s_mlx
 	void			*win_ptr;
 }					t_mlx;
 
-typedef struct		s_ui_button
-{
-	t_p2i			pos;
-	t_p2i			size;
-	char			*label;
-	int				selected;
-}					t_ui_button;
-
 typedef struct		s_ui
 {
 	t_mlx_img		*img;
-	t_ui_button		*buttons;
 	t_p2i			pos;
 }					t_ui;
 
@@ -92,6 +81,9 @@ typedef struct		s_complex
 
 
 typedef void		*(*t_fractal_func)(void*);
+
+t_env				*init_env(char *title, int w, int h);
+void				del_env(t_env *env);
 
 void 				plot_fractal(t_env *env, int width, int height);
 void				*plot_julia(void *env_ptr);

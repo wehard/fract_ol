@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 22:12:47 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 16:20:02 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 17:15:52 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	get_palette_color_ultra(int i)
 		0xFFAA00,
 		0xCC8000,
 		0x995700,
-		0x6A3403
+		0
 	};
 
 	return (color[i]);
@@ -63,26 +63,7 @@ static int	get_palette_color_ultra(int i)
 
 static int	get_palette_color_bw(int i)
 {
-	const int	color[16] = {
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0,
-		0xffffff,
-		0
-	};
-
-	return (color[i]);
+	return (i % 2 != 0 ? 0xffffff : 0);
 }
 
 int			get_color(int i, int iterations, int palette)

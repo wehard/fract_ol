@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 13:27:14 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 16:21:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/30 17:13:02 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static double	ft_abs_d(double d)
 	return (d);
 }
 
-static int	calc_burning_ship(t_complex c)
+static int		calc_burning_ship(t_complex c)
 {
 	t_complex	z;
 	double		temp;
@@ -38,7 +38,7 @@ static int	calc_burning_ship(t_complex c)
 	return (i);
 }
 
-void		*plot_burning_ship(void *env_ptr)
+void			*plot_burning_ship(void *env_ptr)
 {
 	t_env		*env;
 	t_p2i		cur;
@@ -46,20 +46,19 @@ void		*plot_burning_ship(void *env_ptr)
 	int			i;
 
 	env = (t_env*)env_ptr;
-
 	cur.y = env->thread_range_start;
 	while (cur.y < env->thread_range_end)
 	{
 		cur.x = 0;
 		while (cur.x < env->width)
 		{
-			c.r = (cur.x - env->width / 2) / (0.5 * env->zoom * env->width) + env->move_x;
-			c.i = (cur.y - env->height / 2) / (0.5 * env->zoom * env->width) + env->move_y;
+			c.r = (cur.x - env->width / 2) /
+				(0.5 * env->zoom * env->width) + env->move_x;
+			c.i = (cur.y - env->height / 2) /
+				(0.5 * env->zoom * env->width) + env->move_y;
 			i = calc_burning_ship(c);
-			if (i != MAX_ITER)
-				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->iterations, env->color_palette));
-			else
-				put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, 0);
+			put_pixel_mlx_img(env->fractal_img, cur.x, cur.y,
+				get_color(i, env->iterations, env->color_palette));
 			cur.x++;
 		}
 		cur.y++;
