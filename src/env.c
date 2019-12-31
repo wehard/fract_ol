@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 17:30:56 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 17:44:26 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:55:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_env	*init_env(char *title, int w, int h)
 	env->mouse_y = WIN_H;
 	env->color_palette = 0;
 	env->free_julia = 0;
+	env->fractal_type = 0;
+	env->fractal_name = "NONE";
 	ui_init(env);
 	return (env);
 }

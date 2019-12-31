@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 17:35:30 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:58:54 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ static int				ft_usage(void)
 
 static t_fractal_func	get_fractal_function(t_env *env)
 {
-	if (env->fractal_type == FRAC_JULIA)
+	if (env->fractal_type == FRAC_JULIA &&
+		(env->fractal_name = FRAC_JULIA_STR))
 		return (plot_julia);
-	else if (env->fractal_type == FRAC_MANDELBROT)
+	else if (env->fractal_type == FRAC_MANDELBROT &&
+		(env->fractal_name = FRAC_MANDEL_STR))
 		return (plot_mandelbrot);
-	else if (env->fractal_type == FRAC_BURNING_SHIP)
+	else if (env->fractal_type == FRAC_BURNING_SHIP &&
+		(env->fractal_name = FRAC_BURNING_STR))
 		return (plot_burning_ship);
 	else
 		return (plot_julia);
@@ -67,7 +70,8 @@ int						main(int argc, char const *argv[])
 
 	if (argc == 2)
 	{
-		if (!(arg = ft_atoi(argv[1])))
+		arg = ft_atoi(argv[1]);
+		if (arg <= 0 || arg > 3)
 			return (ft_usage());
 		env = init_env("fract_ol", WIN_W, WIN_H);
 		env->fractal_type = arg;

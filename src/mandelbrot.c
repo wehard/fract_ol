@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 17:40:25 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:47:34 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ void		*plot_mandelbrot(void *env_ptr)
 		cur.x = 0;
 		while (cur.x < env->width)
 		{
-			c.r = (cur.x - env->width / 2) / (0.5 * env->zoom * env->width) + env->move_x;
-			c.i = (cur.y - env->height / 2) / (0.5 * env->zoom * env->width) + env->move_y;
+			c.r = (cur.x - env->width / 2) /
+				(0.5 * env->zoom * env->width) + env->move_x;
+			c.i = (cur.y - env->height / 2) /
+				(0.5 * env->zoom * env->width) + env->move_y;
 			i = calc_mandelbrot(c, env);
-			put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->iterations, env->color_palette));
+			put_pixel_mlx_img(env->fractal_img, cur.x, cur.y,
+				get_color(i, env->iterations, env->color_palette));
 			cur.x++;
 		}
 		cur.y++;

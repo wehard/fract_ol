@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 17:27:39 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:54:13 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@
 int		key_press(int key, void *param)
 {
 	t_env *env;
-	float move;
 
-	move = 0.05f;
 	env = (t_env*)param;
-	if (key == KEY_ESC)
-		exit(EXIT_SUCCESS);
-	if (key == KEY_1)
+	if (key == KEY_ESC || key == KEY_SPACE)
+		key == KEY_ESC ? del_env(env) :
+		(env->free_julia = !env->free_julia);
+	if (key == KEY_1 && (env->fractal_name = FRAC_JULIA_STR))
 		env->fractal_type = FRAC_JULIA;
-	if (key == KEY_2)
+	if (key == KEY_2 && (env->fractal_name = FRAC_MANDEL_STR))
 		env->fractal_type = FRAC_MANDELBROT;
-	if (key == KEY_3)
+	if (key == KEY_3 && (env->fractal_name = FRAC_BURNING_STR))
 		env->fractal_type = FRAC_BURNING_SHIP;
 	if (key == KEY_LEFT || key == KEY_RIGHT)
-		key == KEY_LEFT ? (env->move_x += move / env->zoom) : (env->move_x -= move / env->zoom);
+		key == KEY_LEFT ? (env->move_x += 0.05f / env->zoom) :
+			(env->move_x -= 0.05f / env->zoom);
 	if (key == KEY_DOWN || key == KEY_UP)
-		key == KEY_DOWN ? (env->move_y -= move / env->zoom) : (env->move_y += move / env->zoom);
-	if (key == KEY_SPACE)
-		env->free_julia = !env->free_julia;
+		key == KEY_DOWN ? (env->move_y -= 0.05f / env->zoom) :
+			(env->move_y += 0.05f / env->zoom);
 	if (key == KEY_P)
-		env->color_palette < NUM_PALETTE - 1 ? (env->color_palette++) : (env->color_palette = 0);
+		env->color_palette < NUM_PALETTE - 1 ? (env->color_palette++) :
+			(env->color_palette = 0);
 	if (key == KEY_NUM_PLUS || key == KEY_NUM_MINUS)
 		key == KEY_NUM_PLUS ? env->iterations++ : env->iterations--;
 	plot_fractal(env, WIN_W, WIN_H);

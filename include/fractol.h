@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                          :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 17:29:31 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/21 22:48:02 by wkorande         ###   ########.fr       */
+/*   Created: 2019/12/31 12:55:44 by wkorande          #+#    #+#             */
+/*   Updated: 2019/12/31 13:15:49 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define UI_TEXT 0xFFFFFF
 # define UI_BG 0x202020
 # define UI_FG 0x303030
+# define FRAC_JULIA_STR "   JULIA"
+# define FRAC_MANDEL_STR " MANDELBROT"
+# define FRAC_BURNING_STR "BURNING SHIP"
 
 typedef struct		s_mlx_img
 {
@@ -65,6 +68,7 @@ typedef struct		s_env
 	int				mouse_x;
 	int				mouse_y;
 	int				fractal_type;
+	char			*fractal_name;
 	double			zoom;
 	double			move_x;
 	double			move_y;
@@ -79,13 +83,14 @@ typedef struct		s_complex
 	double			i;
 }					t_complex;
 
-
 typedef void		*(*t_fractal_func)(void*);
 
 t_env				*init_env(char *title, int w, int h);
 void				del_env(t_env *env);
 
-void 				plot_fractal(t_env *env, int width, int height);
+char				*get_fractal_name(int i);
+
+void				plot_fractal(t_env *env, int width, int height);
 void				*plot_julia(void *env_ptr);
 void				*plot_mandelbrot(void *env_ptr);
 void				*plot_burning_ship(void *env_ptr);
@@ -94,12 +99,13 @@ t_complex			make_complex(double r, double i);
 t_mlx_img			*create_mlx_image(t_env *env, int width, int height);
 void				clear_mlx_img(t_mlx_img *img);
 void				put_pixel_mlx_img(t_mlx_img *img, int x, int y, int c);
+void				draw_rect(t_mlx_img *img, t_p2i pos, t_p2i size, int color);
 
 void				setup_controls(t_env *env);
-int 				close(void *param);
-int 				expose(void *param);
-int 				mouse_press(int button, int x, int y, void *param);
-int 				mouse_move(int x, int y, void *param);
+int					close(void *param);
+int					expose(void *param);
+int					mouse_press(int button, int x, int y, void *param);
+int					mouse_move(int x, int y, void *param);
 int					key_press(int key, void *param);
 
 int					get_color(int i, int iterations, int palette);

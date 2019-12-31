@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 00:06:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/24 00:20:32 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:25:18 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,21 @@ void		put_pixel_mlx_img(t_mlx_img *img, int x, int y, int c)
 	if (x < 0 || x >= img->w || y < 0 || y >= img->h)
 		return ;
 	*(int*)(img->d_addr + (((y * img->w) + x) * img->bpp)) = c;
+}
+
+void		draw_rect(t_mlx_img *img, t_p2i pos, t_p2i size, int color)
+{
+	t_p2i cur;
+
+	cur.y = pos.y;
+	while (cur.y < pos.y + size.y)
+	{
+		cur.x = pos.x;
+		while (cur.x < pos.x + size.x)
+		{
+			put_pixel_mlx_img(img, cur.x, cur.y, color);
+			cur.x++;
+		}
+		cur.y++;
+	}
 }

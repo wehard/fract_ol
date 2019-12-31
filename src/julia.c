@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:27:17 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/30 17:39:08 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 12:45:48 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static int	calc_julia(t_env *env, t_complex c, t_p2i cur)
 	t_complex	t;
 	int			i;
 
-	z.r = (cur.x - env->width / 2) / (0.5 * env->zoom * env->width) + env->move_x;
-	z.i = (cur.y - env->height / 2) / (0.5 * env->zoom * env->width) + env->move_y;
+	z.r = (cur.x - env->width / 2) / (0.5 * env->zoom * env->width) +
+		env->move_x;
+	z.i = (cur.y - env->height / 2) / (0.5 * env->zoom * env->width) +
+		env->move_y;
 	i = 0;
 	while (i < env->iterations)
 	{
@@ -56,7 +58,8 @@ void		*plot_julia(void *env_ptr)
 		while (cur.x < env->width)
 		{
 			i = calc_julia(env, c, cur);
-			put_pixel_mlx_img(env->fractal_img, cur.x, cur.y, get_color(i, env->iterations, env->color_palette));
+			put_pixel_mlx_img(env->fractal_img, cur.x, cur.y,
+				get_color(i, env->iterations, env->color_palette));
 			cur.x++;
 		}
 		cur.y++;
