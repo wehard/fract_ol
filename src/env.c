@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 17:30:56 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/31 12:55:18 by wkorande         ###   ########.fr       */
+/*   Updated: 2019/12/31 14:27:55 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,42 @@
 #include <stdlib.h>
 #include "mlx.h"
 
-t_env	*init_env(char *title, int w, int h)
+static void	panic(t_env *env)
+{
+	ft_putstr("panic: env failed! freeing everything!");
+	if (env)
+	{
+		if (env->mlx)
+		{
+			if (env->mlx->mlx_ptr && env->mlx->win_ptr)
+				mlx_destroy_window(env->mlx->mlx_ptr, env->mlx->win_ptr);
+			free(env->mlx);
+		}
+		if (env->fractal_img)
+		{
+			mlx_destroy_image(env->mlx->mlx_ptr, env->fractal_img->img);
+			free(env->fractal_img);
+		}
+		if (env->ui && env->ui->img)
+		{
+			mlx_destroy_image(env->mlx->mlx_ptr, env->ui->img->img);
+			free(env->ui->img);
+			free(env->ui);
+		}
+		free(env);
+	}
+	exit(EXIT_FAILURE);
+}
+
+t_env		*init_env(char *title, int w, int h)
 {
 	int		i;
 	t_env	*env;
 
-	env = (t_env*)malloc(sizeof(t_env));
-	env->mlx = (t_mlx*)malloc(sizeof(t_mlx));
+	if (!(env = (t_env*)malloc(sizeof(t_env))))
+		return (NULL);
+	if (!(env->mlx = (t_mlx*)malloc(sizeof(t_mlx))))
+		panic(env);
 	env->mlx->mlx_ptr = mlx_init();
 	env->mlx->win_ptr = mlx_new_window(env->mlx->mlx_ptr, w, h, title);
 	env->width = w / 3 * 2;
@@ -41,7 +70,7 @@ t_env	*init_env(char *title, int w, int h)
 	return (env);
 }
 
-void	del_env(t_env *env)
+void		del_env(t_env *env)
 {
 	mlx_destroy_window(env->mlx->mlx_ptr, env->mlx->win_ptr);
 	mlx_destroy_image(env->mlx->mlx_ptr, env->fractal_img->img);
