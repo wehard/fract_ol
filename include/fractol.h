@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/31 12:55:44 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/31 13:15:49 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/01/02 13:43:36 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define WIN_W 1200
 # define WIN_H 800
-# define NUM_THREADS 8
+# define NUM_THREADS 64
 # define NUM_PALETTE 3
 # define MAX_ITER 255
 # define FRAC_JULIA 1
@@ -90,7 +90,7 @@ void				del_env(t_env *env);
 
 char				*get_fractal_name(int i);
 
-void				plot_fractal(t_env *env, int width, int height);
+void				plot_fractal(t_env *env);
 void				*plot_julia(void *env_ptr);
 void				*plot_mandelbrot(void *env_ptr);
 void				*plot_burning_ship(void *env_ptr);

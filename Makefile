@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2019/12/30 17:33:32 by wkorande         ###   ########.fr        #
+#    Updated: 2020/01/02 13:35:47 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCL = include
 
 LIBFT=../libft
 
-FLAGS= #-Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror
 
 all: $(NAME)
 

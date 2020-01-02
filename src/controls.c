@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 19:45:24 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/31 12:54:13 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/01/02 13:34:21 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		key_press(int key, void *param)
 			(env->color_palette = 0);
 	if (key == KEY_NUM_PLUS || key == KEY_NUM_MINUS)
 		key == KEY_NUM_PLUS ? env->iterations++ : env->iterations--;
-	plot_fractal(env, WIN_W, WIN_H);
+	plot_fractal(env);
 	return (0);
 }
 
@@ -57,7 +57,7 @@ int		mouse_move(int x, int y, void *param)
 	env->mouse_x = x;
 	env->mouse_y = y;
 	if (env->fractal_type == FRAC_JULIA && env->free_julia)
-		plot_fractal(env, WIN_W, WIN_H);
+		plot_fractal(env);
 	return (0);
 }
 
@@ -66,6 +66,8 @@ int		mouse_press(int button, int x, int y, void *param)
 	t_env *env;
 
 	env = (t_env*)param;
+	if (x < 0 || x > WIN_W || y < 0 || y > WIN_H)
+		return (0);
 	if (button == 4 || button == 5)
 	{
 		if (button == 5)
@@ -73,14 +75,17 @@ int		mouse_press(int button, int x, int y, void *param)
 		if (button == 4)
 			env->zoom *= 0.9f;
 	}
-	plot_fractal(env, WIN_W, WIN_H);
+	plot_fractal(env);
 	return (0);
 }
 
 int		close(void *param)
 {
-	(void)param;
-	exit(0);
+	t_env *env;
+
+	env = (t_env*)param;
+	del_env(env);
+	return (1);
 }
 
 void	setup_controls(t_env *env)

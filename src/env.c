@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 17:30:56 by wkorande          #+#    #+#             */
-/*   Updated: 2019/12/31 14:27:55 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/01/02 13:35:03 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	panic(t_env *env)
 
 t_env		*init_env(char *title, int w, int h)
 {
-	int		i;
 	t_env	*env;
 
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
