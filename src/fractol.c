@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2020/01/03 13:55:04 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/01/03 13:58:44 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int						main(int argc, char const *argv[])
 	if (argc == 2)
 	{
 		arg = ft_atoi(argv[1]);
-		if (arg <= 0 || arg > 3)
+		if (arg <= 0 || arg > 3 || argv[1][1] != '\0')
 			return (ft_usage());
 		env = init_env("fract_ol", WIN_W, WIN_H);
 		env->fractal_type = arg;
