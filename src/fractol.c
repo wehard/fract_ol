@@ -6,7 +6,7 @@
 /*   By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:17:07 by wkorande          #+#    #+#             */
-/*   Updated: 2020/01/02 13:43:01 by wkorande         ###   ########.fr       */
+/*   Updated: 2020/01/03 13:55:04 by wkorande         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static int				ft_usage(void)
 {
-	ft_putendl("usage: ./fract_ol <fractal type>");
+	ft_putendl("usage: ./fractol <fractal type>");
 	ft_putendl("\t1: julia");
 	ft_putendl("\t2: mandelbrot");
 	ft_putendl("\t3: burning ship");
