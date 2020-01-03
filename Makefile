@@ -6,7 +6,7 @@
 #    By: wkorande <wkorande@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 13:58:13 by wkorande          #+#    #+#              #
-#    Updated: 2020/01/02 13:35:47 by wkorande         ###   ########.fr        #
+#    Updated: 2020/01/03 13:32:23 by wkorande         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS = $(SRC:.c=.o)
 
 INCL = include
 
-LIBFT=../libft
+LIBFT=libft
 
 FLAGS= -Wall -Wextra -Werror
 
@@ -45,12 +45,6 @@ $(NAME):
 
 libft:
 	make re -C $(LIBFT)
-
-debug:
-	gcc -g $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lm -pthread -framework OpenGL -framework AppKit
-
-linux:
-	gcc $(FLAGS) -o $(NAME) -I$(INCL) -I $(LIBFT)/includes $(SRCS) -L$(LIBFT) -lft -lmlx -lXext -lX11 -lm -lpthread
 
 clean:
 	@printf "Removing objects\n"
